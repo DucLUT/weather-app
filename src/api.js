@@ -22,8 +22,9 @@ const getWeather = async (city, country_code = '') => {
       const weatherCondition = weatherData.weather[0].description
       const temperature = (weatherData.main.temp - 273.15).toFixed(2)
       const humidity = weatherData.main.humidity
+      const icon = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`; 
 
-      return { weatherCondition, temperature, humidity }
+      return { weatherCondition, temperature, humidity, icon }
     } else {
       console.error(`Error: ${response.status}, ${response.data.message}`)
       return null

@@ -19,8 +19,8 @@ const WeatherComponent = () => {
         const response = await generateDynamicResponse(
           city,
           data.weatherCondition,
-          data.temperature,
-          data.humidity
+          data.temperature, 
+          data.humidity,
         )
         setDynamicResponse(response || 'Unable to generate response')
       }
@@ -69,6 +69,14 @@ const WeatherComponent = () => {
           <p style={{ textAlign: 'center' }}>
             Humidity: {weatherData.humidity}%
           </p>
+          <div className="icon-container">
+            {weatherData.icon && (
+              <img
+                src={weatherData.icon} // Use the fetched image
+                alt="Weather icon"
+              />
+            )}
+          </div>
         </div>
       )}
       {dynamicResponse && (

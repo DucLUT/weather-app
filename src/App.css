@@ -83,3 +83,9 @@ p {
 .dynamic-response {
   margin-top: 20px;
 }
+
+.icon {
+  position: absolute;
+  top: -10px; /* Adjust as needed */
+  right: -10px; /* Adjust as needed */
+}
