@@ -69,14 +69,21 @@ const WeatherComponent = () => {
           <p style={{ textAlign: 'center' }}>
             Humidity: {weatherData.humidity}%
           </p>
-          <div className="icon-container">
-            {weatherData.icon && (
+          
+          {weatherData.icon && (
+            <>
               <img
+                className="icon-left" // Add class name
                 src={weatherData.icon} // Use the fetched image
                 alt="Weather icon"
               />
-            )}
-          </div>
+              <img
+                className="icon-right" // Add class name
+                src={weatherData.icon} // Use the fetched image
+                alt="Weather icon"
+              />
+            </>
+          )}
         </div>
       )}
       {dynamicResponse && (

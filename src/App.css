@@ -15,7 +15,7 @@ body {
   width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: antiquewhite;
+  background-color: rgb(230, 198, 157);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -84,8 +84,14 @@ p {
   margin-top: 20px;
 }
 
-.icon {
+.icon-left {
   position: absolute;
-  top: -10px; /* Adjust as needed */
-  right: -10px; /* Adjust as needed */
+  top: 10px; /* Adjust as needed */
+  left: 80px; /* Adjust as needed */
+}
+
+.icon-right {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 80px; /* Adjust as needed */
 }
