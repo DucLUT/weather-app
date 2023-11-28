@@ -6,7 +6,7 @@ const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
 
 const openaiApiUrl =
   'https://api.openai.com/v1/engines/text-davinci-003/completions'
-const openaiApiKey = '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'
+const openaiApiKey = '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'
 
 const getWeather = async (city, country_code = '') => {
   try {
@@ -22,7 +22,7 @@ const getWeather = async (city, country_code = '') => {
       const weatherCondition = weatherData.weather[0].description
       const temperature = (weatherData.main.temp - 273.15).toFixed(2)
       const humidity = weatherData.main.humidity
-      const icon = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`; 
+      const icon = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
 
       return { weatherCondition, temperature, humidity, icon }
     } else {

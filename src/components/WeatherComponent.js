@@ -1,5 +1,5 @@
 // src/WeatherComponent.js
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getWeather, generateDynamicResponse } from '../api'
 
 const WeatherComponent = () => {
@@ -8,6 +8,7 @@ const WeatherComponent = () => {
   const [weatherData, setWeatherData] = useState(null)
   const [dynamicResponse, setDynamicResponse] = useState('')
   const [error, setError] = useState('')
+  const [backgroundImage, setBackgroundImage] = useState('/forecast1.avif')
 
   const fetchWeatherData = async () => {
     try {
@@ -23,7 +24,13 @@ const WeatherComponent = () => {
           data.humidity
         )
         setDynamicResponse(response || 'Unable to generate response')
-        const image = '/hot.jpg'
+        if (data.temperature < 10) {
+          setBackgroundImage('/cold3.jpg')
+        } else if (data.temperature >= 11 && data.temperature <= 21) {
+          setBackgroundImage('/warm.avif')
+        } else {
+          setBackgroundImage('/hot.jpg')
+        }
       }
     } catch (error) {
       setError(
@@ -32,8 +39,15 @@ const WeatherComponent = () => {
     }
   }
 
+  useEffect(() => {
+    console.log('backgroundImage:', backgroundImage)
+  }, [backgroundImage])
+
   return (
-    <div className="container" style={{ backgroundImage: 'url("/hot.jpg")' }}>
+    <div
+      className="container"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <h1>Weather App</h1>
       <form>
         <label>
