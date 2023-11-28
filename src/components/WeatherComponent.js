@@ -19,10 +19,11 @@ const WeatherComponent = () => {
         const response = await generateDynamicResponse(
           city,
           data.weatherCondition,
-          data.temperature, 
-          data.humidity,
+          data.temperature,
+          data.humidity
         )
         setDynamicResponse(response || 'Unable to generate response')
+        const image = '/hot.jpg'
       }
     } catch (error) {
       setError(
@@ -32,7 +33,7 @@ const WeatherComponent = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container" style={{ backgroundImage: 'url("/hot.jpg")' }}>
       <h1>Weather App</h1>
       <form>
         <label>
@@ -69,17 +70,17 @@ const WeatherComponent = () => {
           <p style={{ textAlign: 'center' }}>
             Humidity: {weatherData.humidity}%
           </p>
-          
+
           {weatherData.icon && (
             <>
               <img
-                className="icon-left" // Add class name
-                src={weatherData.icon} // Use the fetched image
+                className="icon-left"
+                src={weatherData.icon}
                 alt="Weather icon"
               />
               <img
-                className="icon-right" // Add class name
-                src={weatherData.icon} // Use the fetched image
+                className="icon-right"
+                src={weatherData.icon}
                 alt="Weather icon"
               />
             </>
