@@ -1,19 +1,21 @@
 // src/WeatherComponent.js
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { getWeather, generateDynamicResponse } from '../api'
+import Card from './Card'
 
 const WeatherComponent = () => {
   const [city, setCity] = useState('')
-  const [countryCode, setCountryCode] = useState('')
   const [weatherData, setWeatherData] = useState(null)
-  const [dynamicResponse, setDynamicResponse] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [backgroundImage, setBackgroundImage] = useState('/forecast1.avif')
+  const [activities, setActivities] = useState([])
 
   const fetchWeatherData = async () => {
     try {
       setError('')
-      const data = await getWeather(city, countryCode)
+      setIsLoading(true)
+      const data = await getWeather(city)
 
       if (data) {
         setWeatherData(data)
@@ -23,11 +25,16 @@ const WeatherComponent = () => {
           data.temperature,
           data.humidity
         )
-        setDynamicResponse(response || 'Unable to generate response')
+        console.log(response)
+        setIsLoading(false)
+        if (response) {
+          const activitiesArray = response.split('\n').filter((i) => !!i)
+          setActivities(activitiesArray)
+        }
         if (data.temperature < 10) {
           setBackgroundImage('/cold3.jpg')
         } else if (data.temperature >= 11 && data.temperature <= 21) {
-          setBackgroundImage('/warm.avif')
+          setBackgroundImage('/fresh.avif')
         } else {
           setBackgroundImage('/hot.jpg')
         }
@@ -39,74 +46,73 @@ const WeatherComponent = () => {
     }
   }
 
-  useEffect(() => {
-    console.log('backgroundImage:', backgroundImage)
-  }, [backgroundImage])
-
   return (
-    <div
-      className="container"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <h1>Weather App</h1>
-      <form>
-        <label>
-          City or places:
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            id="input"
-          />
-        </label>
-        <label>
-          Country Code:
-          <input
-            type="text"
-            value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
-          />
-        </label>
-        <button type="button" onClick={fetchWeatherData}>
-          Get Weather ⛅️
-        </button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weatherData && (
-        <div className="weather-info">
-          <h2 style={{ textAlign: 'center' }}>Weather Information:</h2>
-          <p style={{ textAlign: 'center' }}>
-            Weather: {weatherData.weatherCondition}
-          </p>
-          <p style={{ textAlign: 'center' }}>
-            Temperature: {weatherData.temperature}°C
-          </p>
-          <p style={{ textAlign: 'center' }}>
-            Humidity: {weatherData.humidity}%
-          </p>
+    <div className="container app-wrapper">
+      <div
+        className="left"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      ></div>
+      <div className="right">
+        <h1>Weather App</h1>
+        <p style={{ marginBottom: '16px' }}>
+          Type in a city to search for the weather:
+        </p>
+        <form>
+          <label>
+            <input
+              type="text"
+              placeholder="Search"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              id="input"
+            />
+          </label>
 
-          {weatherData.icon && (
-            <>
-              <img
-                className="icon-left"
-                src={weatherData.icon}
-                alt="Weather icon"
-              />
-              <img
-                className="icon-right"
-                src={weatherData.icon}
-                alt="Weather icon"
-              />
-            </>
-          )}
-        </div>
-      )}
-      {dynamicResponse && (
-        <div className="dynamic-response">
-          <h2 style={{ textAlign: 'center' }}>Recommended activities:</h2>
-          <p style={{ textAlign: 'center' }}>{dynamicResponse}</p>
-        </div>
-      )}
+          <button type="button" onClick={fetchWeatherData} disabled={isLoading}>
+            {isLoading ? 'Searching...' : ' Get Weather ⛅️ '}
+          </button>
+        </form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {weatherData && (
+          <div className="weather-info">
+            <h2 style={{ textAlign: 'center' }}>Weather Information:</h2>
+            <p style={{ textAlign: 'center' }}>
+              Weather: {weatherData.weatherCondition}
+            </p>
+            <p style={{ textAlign: 'center' }}>
+              Temperature: {weatherData.temperature}°C
+            </p>
+            <p style={{ textAlign: 'center' }}>
+              Humidity: {weatherData.humidity}%
+            </p>
+
+            {weatherData.icon && (
+              <div>
+                <img
+                  className="icon-left"
+                  src={weatherData.icon}
+                  alt="Weather icon"
+                />
+                <img
+                  className="icon-right"
+                  src={weatherData.icon}
+                  alt="Weather icon"
+                />
+              </div>
+            )}
+          </div>
+        )}
+        {activities.length > 0 ? (
+          <div className="dynamic-response">
+            <h2 style={{ textAlign: 'center' }}>Recommended activities:</h2>
+            <div className="card-list">
+              {activities.map((i, idx) => (
+                <Card key={idx} content={i} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }

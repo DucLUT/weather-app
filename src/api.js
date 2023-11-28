@@ -6,7 +6,7 @@ const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
 
 const openaiApiUrl =
   'https://api.openai.com/v1/engines/text-davinci-003/completions'
-const openaiApiKey = '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'
+const openaiApiKey = process.env.REACT_APP_OPEN_API_KEY || ''
 
 const getWeather = async (city, country_code = '') => {
   try {

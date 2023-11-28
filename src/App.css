@@ -3,21 +3,41 @@
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #093652;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  background: #232526; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Montserrat';
 }
 
 .container {
-  position: relative;
-  width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: rgb(230, 198, 157);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* position: flex; */
+  width: 960px;
+  height: 640px;
+  margin: 80px auto 0;
+  /* padding: 20px; */
+  /* background-color: rgb(230, 198, 157); */
+  border-radius: 16px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: center;
@@ -25,7 +45,17 @@ body {
   background-size: cover;
   /* background-image: url('hot.jpg'); */
 }
-
+.right {
+  width: 50%;
+  overflow: auto;
+  text-align: center;
+  padding: 24px;
+  background: white;
+}
+.left {
+  width: 50%;
+  background-size: cover;
+}
 h1 {
   text-align: center;
   color: #333;
@@ -44,14 +74,15 @@ label {
 }
 
 input {
-  padding: 10px;
-  margin-bottom: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
   border: 1px solid #994d1c;
-  border-radius: 4px;
+  border-radius: 8px;
+  width: 200px;
   font-size: 14px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  size: 100%;
-  align-self: center;
+  /* size: 100%; */
+  /* align-self: center; */
 }
 input:focus {
   border-color: #e48f45;
@@ -59,11 +90,13 @@ input:focus {
 }
 
 button {
-  padding: 10px;
+  padding: 12px 24px;
   background-color: #202123;
   color: #fff;
+  width: 180px;
+  height: 48px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
@@ -71,6 +104,11 @@ button {
 
 button:hover {
   background-color: #6d4428;
+}
+
+button:disabled {
+  background-color: #414345;
+  cursor: not-allowed;
 }
 
 p {
@@ -99,4 +137,27 @@ p {
   position: absolute;
   top: 10px; /* Adjust as needed */
   right: 80px; /* Adjust as needed */
+}
+
+.app-wrapper {
+  display: flex;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.card {
+  width: calc(50% - 8px);
+  text-align: left;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+}
+
+@media screen and (min-width: 1560px) {
+  .container {
+    margin-top: 160px;
+  }
 }
