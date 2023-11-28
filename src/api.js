@@ -1,7 +1,7 @@
 // src/api.js
 import axios from 'axios'
 
-const weatherApiUrl = 'http://api.openweathermap.org/data/2.5/weather'
+const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather'
 const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
 
 const openaiApiUrl =
