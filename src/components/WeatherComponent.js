@@ -32,7 +32,7 @@ const WeatherComponent = () => {
   }
 
   return (
-    <div class="container">
+    <div className="container">
       <h1>Weather App</h1>
       <form>
         <label>
@@ -58,7 +58,7 @@ const WeatherComponent = () => {
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {weatherData && (
-        <div>
+        <div className="weather-info">
           <h2>Weather Information:</h2>
           <p>Weather: {weatherData.weatherCondition}</p>
           <p>Temperature: {weatherData.temperature}°C</p>
@@ -66,7 +66,7 @@ const WeatherComponent = () => {
         </div>
       )}
       {dynamicResponse && (
-        <div>
+        <div className="dynamic-response">
           <h2>Dynamic Response:</h2>
           <p>{dynamicResponse}</p>
         </div>
