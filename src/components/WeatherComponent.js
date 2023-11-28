@@ -36,7 +36,7 @@ const WeatherComponent = () => {
       <h1>Weather App</h1>
       <form>
         <label>
-          City:
+          City or places:
           <input
             type="text"
             value={city}
@@ -53,22 +53,28 @@ const WeatherComponent = () => {
           />
         </label>
         <button type="button" onClick={fetchWeatherData}>
-          Get Weather
+          Get Weather ⛅️
         </button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {weatherData && (
         <div className="weather-info">
-          <h2>Weather Information:</h2>
-          <p>Weather: {weatherData.weatherCondition}</p>
-          <p>Temperature: {weatherData.temperature}°C</p>
-          <p>Humidity: {weatherData.humidity}%</p>
+          <h2 style={{ textAlign: 'center' }}>Weather Information:</h2>
+          <p style={{ textAlign: 'center' }}>
+            Weather: {weatherData.weatherCondition}
+          </p>
+          <p style={{ textAlign: 'center' }}>
+            Temperature: {weatherData.temperature}°C
+          </p>
+          <p style={{ textAlign: 'center' }}>
+            Humidity: {weatherData.humidity}%
+          </p>
         </div>
       )}
       {dynamicResponse && (
         <div className="dynamic-response">
-          <h2>Dynamic Response:</h2>
-          <p>{dynamicResponse}</p>
+          <h2 style={{ textAlign: 'center' }}>Recommended activities:</h2>
+          <p style={{ textAlign: 'center' }}>{dynamicResponse}</p>
         </div>
       )}
     </div>

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -7,12 +11,14 @@ body {
 }
 
 .container {
-  width: 100%;
+  position: relative;
+  width: 600px;
   margin: 0 auto;
   padding: 20px;
   background-color: antiquewhite;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 h1 {
@@ -24,6 +30,7 @@ form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 label {
@@ -32,11 +39,18 @@ label {
 }
 
 input {
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #994d1c;
   border-radius: 4px;
   font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  size: 100%;
+  align-self: center;
+}
+input:focus {
+  border-color: #e48f45;
+  box-shadow: #994d1c;
 }
 
 button {
@@ -51,7 +65,7 @@ button {
 }
 
 button:hover {
-  background-color: #0066cc;
+  background-color: #6d4428;
 }
 
 p {
