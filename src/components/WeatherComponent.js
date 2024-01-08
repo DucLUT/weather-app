@@ -25,9 +25,9 @@ const WeatherComponent = () => {
           data.temperature,
           data.humidity
         )
-        console.log(response)
         setIsLoading(false)
         if (response) {
+          //console.log("respons!e", response) 
           const activitiesArray = response.split('\n').filter((i) => !!i)
           setActivities(activitiesArray)
         }

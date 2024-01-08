@@ -4,8 +4,10 @@ import axios from 'axios'
 const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather'
 const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
 
-const openaiApiUrl =
-  'https://api.openai.com/v1/engines/text-davinci-003/completions'
+
+//const openaiApiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions'
+const openaiApiUrl = 'https://api.openai.com/v1/chat/completions'
+
 const openaiApiKey = process.env.REACT_APP_OPEN_API_KEY || ''
 
 const getWeather = async (city, country_code = '') => {
@@ -47,8 +49,19 @@ const generateDynamicResponse = async (
     const response = await axios.post(
       openaiApiUrl,
       {
-        prompt,
-        max_tokens: 100,
+        // prompt,
+        // max_tokens: 100,
+        "model": "gpt-3.5-turbo",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a travel assistant, skilled in recommending activities based on weather conditions."
+          },
+          {
+            "role": "user",
+            "content": prompt
+          }
+        ]
       },
       {
         headers: {
@@ -58,7 +71,7 @@ const generateDynamicResponse = async (
     )
 
     if (response.status === 200) {
-      return response.data.choices[0].text.trim()
+      return response?.data?.choices[0].message.content;
     } else {
       console.error(`Error: ${response.status}, ${response.data.error.message}`)
       return null
