@@ -1,6 +1,4 @@
-# To the demo app:
-
-https://weather-app-d4g9.onrender.com/
+# To the demo app: https://weather-app-d4g9.onrender.com/
 
 # Getting Started with Create React App
 
