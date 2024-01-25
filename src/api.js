@@ -1,5 +1,6 @@
 // src/api.js
 import axios from 'axios'
+//const axios = require('axios')
 
 const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather'
 const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
@@ -12,21 +13,28 @@ const openaiApiKey = process.env.REACT_APP_OPEN_API_KEY || ''
 
 const getWeather = async (city, country_code = '') => {
   try {
+    const q = country_code ? `${city},${country_code}` : city; // if country_code is not provided, use city as the only parameter
     const response = await axios.get(weatherApiUrl, {
       params: {
-        q: `${city},${country_code}`,
+        //q: `${city},${country_code}`,
+        q,
         appid: weatherApiKey,
       },
     })
 
     if (response.status === 200) {
       const weatherData = response.data
+
+      //console.log("weatherData", weatherData)
+      const name = weatherData.name
+
+
       const weatherCondition = weatherData.weather[0].description
       const temperature = (weatherData.main.temp - 273.15).toFixed(2)
       const humidity = weatherData.main.humidity
       const icon = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
 
-      return { weatherCondition, temperature, humidity, icon }
+      return { weatherCondition, temperature, humidity, icon, name }
     } else {
       console.error(`Error: ${response.status}, ${response.data.message}`)
       return null
