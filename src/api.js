@@ -1,6 +1,5 @@
 // src/api.js
 import axios from 'axios'
-//const axios = require('axios')
 
 const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather'
 const weatherApiKey = 'd86d3f5a3ca87a0cb18861f1a608c4da'
@@ -16,7 +15,6 @@ const getWeather = async (city, country_code = '') => {
     const q = country_code ? `${city},${country_code}` : city; // if country_code is not provided, use city as the only parameter
     const response = await axios.get(weatherApiUrl, {
       params: {
-        //q: `${city},${country_code}`,
         q,
         appid: weatherApiKey,
       },
