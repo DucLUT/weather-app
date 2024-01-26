@@ -38,11 +38,19 @@ const WeatherComponent = () => {
         } else {
           setBackgroundImage('/hot.jpg')
         }
+      } else {
+        // Set a timer to re-enable (in case the input is wrong) the search button after 5 seconds
+        setError('I cannot find your place. Please try again!')
+        setTimeout(() => {
+          setIsLoading(false)
+          setError('')
+        }, 5000)
       }
     } catch (error) {
       setError(
         'Error fetching weather data. Please check your inputs and try again.'
       )
+      
     }
   }
 
